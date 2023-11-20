@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Zombie",
+        "description": "The Zombie is a behemoth of a cocktail that features three different rums—Jamaican, Puerto Rican and 151-proof—along with fresh lime juice, falernum, grenadine, a few drops of absinthe and Don's mix, a cinnamon-flavored simple syrup mixed with fresh grapefruit juice.",
+        "description_long": "The Zombie is a classic drink by the legendary bartender and restaurateur Donn Beach. It's one of many popular cocktails created and served at the lively Hollywood bar, Don the Beachcomber, which opened in 1933 and was responsible for kicking off what became popularly known as the Tiki-style of drink.",
+        "link": "/drink?drinkName=Zombie",
+        "ingredients": [
+            {
+                "type": "Rum",
+                "brand": "Jamaican",
+                "amount": "1.5oz"
+            },
+            {
+                "type": "Rum",
+                "brand": "Puerto Rican gold",
+                "amount": "1.5oz"
+            },
+            {
+                "type": "Rum",
+                "brand": "151-proof demerara",
+                "amount": "1oz"
+            },
+            {
+                "type": "NA",
+                "brand": "lime juice",
+                "amount": ".75oz"
+            },
+            {
+                "type": "NA",
+                "brand": "falernum",
+                "amount": ".5oz"
+            }
+        ],
+        "instructions": [],
+        "image": "/drinkImages/Zombie.jpg",
+        "image_alt": "An image of a Zombie Cocktail"
+    },
+    {
+        "name": "Tom Collins",
+        "description": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.",
+        "description_long": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.",
+        "link": "/drink?drinkName=TomCollins",
+        "ingredients": [
+            {
+                "type": "Rum",
+                "brand": "Jamaican",
+                "amount": "1.5oz"
+            },
+            {
+                "type": "Rum",
+                "brand": "Puerto Rican gold",
+                "amount": "1.5oz"
+            },
+            {
+                "type": "Rum",
+                "brand": "151-proof demerara",
+                "amount": "1oz"
+            },
+            {
+                "type": "NA",
+                "brand": "lime juice",
+                "amount": ".75oz"
+            },
+            {
+                "type": "NA",
+                "brand": "falernum",
+                "amount": ".5oz"
+            }
+        ],
+        "instructions": [],
+        "image": "/drinkImages/TomCollins.jpg",
+        "image_alt": "An image of a Tom Collins Cocktail"
+    }
+]
