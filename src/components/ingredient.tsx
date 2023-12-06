@@ -4,23 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { INGREDIENTS, DRINKS } from './constants';
+import { Ingredient, Drink } from './types';
 
-interface Ingredient {
-    type: string;
-    brand: string;
-    amount: string;
-}
 
-interface Drink {
-    name: string;
-    description: string;
-    description_long: string;
-    link: string;
-    ingredients: Ingredient[];
-    instructions: string[];
-    image: string;
-    image_alt: string;
-}
 function IngredientRow(prop: {ingredient: Ingredient}) {
     return (
             <p>{prop.ingredient.type}</p>
@@ -43,10 +29,8 @@ function IngredientTable(prop: { products: Ingredient[]} ) {
   
         rows.push(
             <ProductRow
-                product={product}
-                key={product.brand} />
+                product={product} />
         );
-        lastCategory = product.type;
     });
 
     return (
@@ -70,7 +54,7 @@ function IngredientComponent(){
 
     function handleAdd(){
         if(name != ""){
-            const newIngredient:Ingredient = {"type": name, "brand":"", "amount": ""}
+            const newIngredient:Ingredient = {"type": name}
             const newList = ingredients.concat( newIngredient )
             setIngredients(newList)
             setName("")
@@ -129,7 +113,7 @@ function DrinkLink( props: {drink: Drink}){
                     src={props.drink.image} // Route of the image file
                     height={120} // Desired size with correct aspect ratio
                     width={120} // Desired size with correct aspect ratio
-                    alt={props.drink.image_alt}
+                    alt={props.drink.image_alt === undefined ? "" : props.drink.image_alt}
                 />
                 <div className="flex flex-col">
                     <h1><Link href={props.drink.link} className="text-lg font-semibold text-center md:text-left">{props.drink.name}</Link></h1>

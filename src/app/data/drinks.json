@@ -31,7 +31,26 @@
                 "amount": ".5oz"
             }
         ],
-        "instructions": [],
+        
+            "ingredients_print": [
+                "1 1/2 ounces Jamaican rum",
+                "1 1/2 ounces Puerto Rican gold rum",
+                "1 ounce 151-proof demerara rum",
+                "1/8 teaspoon Herbsaint or Pernod",
+                "3/4 ounce lime juice, freshly squeezed",
+                "1/2 ounce falernum",
+                "1/2 ounce Donn\u2019s mix*",
+                "1 teaspoon grenadine",
+                "1 dash Angostura bitters",
+                "Garnish: mint sprig"
+            ],
+            "instructions": [
+                ",Add the Jamaica rum, Puerto Rican gold rum, demerara rum, Pernod, lime juice, Donn\u2019s mix, falernum, grenadine and bitters into a blender, then add 6 ounces of crushed ice.",
+                "Blend at high speed for no more than 5 seconds.",
+                "Pour the contents into a tall glass or Tiki mug and add additional crushed ice to fill, if necessary.",
+                "Garnish with a mint sprig."
+            ],
+        
         "image": "/drinkImages/Zombie.jpg",
         "image_alt": "An image of a Zombie Cocktail"
     },

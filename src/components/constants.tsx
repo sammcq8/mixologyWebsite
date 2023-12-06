@@ -1,154 +1,22 @@
-interface Ingredient {
-    type: string;
-    brand: string;
-    amount: string;
-}
-
-interface Drink {
-    name: string;
-    description: string;
-    description_long: string;
-    link: string;
-    ingredients: Ingredient[];
-    instructions: string[];
-    image: string;
-    image_alt: string;
-}
+import { Ingredient, Drink } from "./types"
 
 const INGREDIENTS: Ingredient[] = [
-    { "type": "Rum", "brand": "Plantation", "amount": "0oz" },
-    { "type": "Rum", "brand": "Plantation 151", "amount": "0oz" },
-    { "type": "Gin", "brand": "Beefeater", "amount": "0oz" },
-    { "type": "NA", "brand": "Simple Syrup", "amount": "0oz" },
-    { "type": "Cider", "brand": "Ace's Pineapple", "amount": "0oz" },
+    { "type": "Rum"},
+    { "type": "Rum" },
+    { "type": "Gin"},
+    { "type": "Simple Syrup"},
+    { "type": "Cider"},
 ]
-const DRINK_INDICIES = { "Zombie": 0, "TomCollins": 1 }
 
 const DRINKS: Drink[] = [
-    {
-        "name": "Zombie",
-        "description": "The Zombie is a behemoth of a cocktail that features three different rums—Jamaican, Puerto Rican and 151-proof—along with fresh lime juice, falernum, grenadine, a few drops of absinthe and Don's mix, a cinnamon-flavored simple syrup mixed with fresh grapefruit juice.",
-        "description_long": "The Zombie is a classic drink by the legendary bartender and restaurateur Donn Beach. It's one of many popular cocktails created and served at the lively Hollywood bar, Don the Beachcomber, which opened in 1933 and was responsible for kicking off what became popularly known as the Tiki-style of drink.",
-        "link": "/drink?drinkName=Zombie",
-        "ingredients": [
-            {
-                "type": "Rum",
-                "brand": "Jamaican",
-                "amount": "1.5oz"
-            },
-            {
-                "type": "Rum",
-                "brand": "Puerto Rican gold",
-                "amount": "1.5oz"
-            },
-            {
-                "type": "Rum",
-                "brand": "151-proof demerara",
-                "amount": "1oz"
-            },
-            {
-                "type": "NA",
-                "brand": "lime juice",
-                "amount": ".75oz"
-            },
-            {
-                "type": "NA",
-                "brand": "falernum",
-                "amount": ".5oz"
-            }
-        ],
-        "instructions": [],
-        "image": "/drinkImages/Zombie.jpg",
-        "image_alt": "An image of a Zombie Cocktail"
-    },
-    {
-        "name": "Tom Collins",
-        "description": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.",
-        "description_long": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.",
-        "link": "/drink?drinkName=Tom Collins",
-        "ingredients": [
-            {
-                "type": "Gin",
-                "brand": "London Dry",
-                "amount": "2oz"
-            },
-            {
-                "type": "NA",
-                "brand": "Lemon Juice",
-                "amount": "1oz"
-            },
-            {
-                "type": "NA",
-                "brand": "Simple Syrup",
-                "amount": ".5oz"
-            },
-            {
-                "type": "NA",
-                "brand": "Club Soda",
-                "amount": "to top"
-            },
-            {
-                "type": "NA",
-                "brand": "Lemon Wheel",
-                "amount": "to garnish"
-            },
-            {
-                "type": "NA",
-                "brand": "Maraschino Cherry",
-                "amount": "to garnish"
-            }
-        ],
-        "instructions": [
-            "Add the gin, lemon juice and simple syrup to a Collins glass.",
-            "Fill with ice, top with club soda and stir.",
-            "Garnish with a lemon wheel and maraschino cherry(optional)."],
-        "image": "/drinkImages/TomCollins.jpg",
-        "image_alt": "An image of a Tom Collins Cocktail"
-    },
-    {
-        "name": "Brandy Old Fashioned",
-        "description": "The Brandy Old Fashioned, aka the Wisconsin Old Fashioned, is practically the state’s official drink. In addition to brandy, it calls for muddled fruit and a topper of lemon-lime soda. So, it’s not your great-great-grandfather’s Old Fashioned. Well, unless he’s from Wisconsin.",
-        "description_long": "The Brandy Old Fashioned, aka the Wisconsin Old Fashioned, is practically the state’s official drink. In addition to brandy, it calls for muddled fruit and a topper of lemon-lime soda. So, it’s not your great-great-grandfather’s Old Fashioned. Well, unless he’s from Wisconsin.",
-        "link": "/drink?drinkName=Brandy Old Fashioned",
-        "ingredients": [
-            {
-                "type": "NA",
-                "brand": "Angostura Bitters",
-                "amount": "3 dashes"
-            },
-            {
-                "type": "NA",
-                "brand": "orange slices",
-                "amount": "2"
-            },
-            {
-                "type": "NA",
-                "brand": "maraschino cherries",
-                "amount": "2"
-            },
-            {
-                "type": "NA",
-                "brand": "Sugar Cube",
-                "amount": "1"
-            },
-            {
-                "type": "Brandy",
-                "brand": "",
-                "amount": "2oz"
-            },
-            {
-                "type": "NA",
-                "brand": "Club soda",
-                "amount": "to top"
-            }
-        ],
-        "instructions": [
-            "Add the bitters, orange slices, cherries and sugar cube to an Old Fashioned glass and muddle to combine.",
-            "Add ice to fill the glass, then add the brandy.",
-            "Top with the club soda, and stir to chill."],
-        "image": "/drinkImages/BrandyOldFashioned.jpg",
-        "image_alt": "An image of a Tom Collins Cocktail"
-    }
+    { "name": "Zombie Rum Cocktail", "ingredients": [{ "type": "jamaican rum" }, { "type": "puerto rican gold rum" }, { "type": "demerara rum" }, { "type": "herbsaint" }, { "type": "pernod" }, { "type": "lime juice" }, { "type": "falernum" }, { "type": "donn\u2019s mix" }, { "type": "grenadine" }, { "type": "angostura bitters" }, { "type": "mint sprig" }], "ingredients_print": ["1 1/2 ounces Jamaican rum", "1 1/2 ounces Puerto Rican gold rum", "1 ounce 151-proof demerara rum", "1/8 teaspoon Herbsaint or Pernod", "3/4 ounce lime juice, freshly squeezed", "1/2 ounce falernum", "1/2 ounce Donn\u2019s mix*", "1 teaspoon grenadine", "1 dash Angostura bitters", "Garnish: mint sprig"], "description": "The Zombie cocktail was created in the 1930s by legendary Donn Beach of Don the Beachcomber, and the drink helped to kick off the \"Tiki\" era of drinks.", "description_long": "The Zombie cocktail was created in the 1930s by legendary Donn Beach of Don the Beachcomber, and the drink helped to kick off the \"Tiki\" era of drinks.", "link": "/drink?drinkName=ZombieRumCocktail", "image": "/drinkImages/ZombieRumCocktail.jpg", "instructions": ["Add the Jamaica rum, Puerto Rican gold rum, demerara rum, Pernod, lime juice, Donn\u2019s mix, falernum, grenadine and bitters into a blender, then add 6 ounces of crushed ice.", "Blend at high speed for no more than 5 seconds.", "Pour the contents into a tall glass or Tiki mug and add additional crushed ice to fill, if necessary.", "Garnish with a mint sprig."], "source": "https://www.liquor.com/recipes/zombie-2/" },
+    { "name": "Tom Collins", "ingredients": [{ "type": "london dry gin" }, { "type": "lemon juice" }, { "type": "simple syrup" }, { "type": "club soda" }, { "type": "lemon wheel" }, { "type": "maraschino cherry" }], "ingredients_print": ["2 ounces London dry gin", "1 ounce lemon juice, freshly squeezed", "1/2 ounce simple syrup", "Club soda, to top", "Garnish: lemon wheel", "Garnish: maraschino cherry"], "description": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.", "description_long": "The classic Tom Collins is a straightforward and refreshing cocktail that combines gin with lemon juice, sugar and club soda.", "link": "/drink?drinkName=TomCollins", "image": "/drinkImages/TomCollins.jpg", "instructions": ["Add the gin, lemon juice and simple syrup to a Collins glass.", "Fill with ice, top with club soda and stir.", "Garnish with a lemon wheel and maraschino cherry (optional)."], "source": "https://www.liquor.com/recipes/tom-collins-2/" },
+    { "name": "Midori Sour", "ingredients": [{ "type": "midori" }, { "type": "vodka" }, { "type": "lemon juice" }, { "type": "lime juice" }, { "type": "soda water" }, { "type": "lemon wheel" }], "ingredients_print": ["1 ounce Midori", "1 ounce vodka", "1/2 ounce lemon juice, freshly squeezed", "1/2 ounce lime juice, freshly squeezed", "Soda water, to top", "Garnish: lemon wheel"], "description": "This bright-green blast from the past is often misunderstood. But when made with fresh ingredients, the Midori Sour stands on its own as a must-know classic cocktail. Here's the recipe to try.", "description_long": "This bright-green blast from the past is often misunderstood. But when made with fresh ingredients, the Midori Sour stands on its own as a must-know classic cocktail. Here's the recipe to try.", "link": "/drink?drinkName=MidoriSour", "image": "/drinkImages/MidoriSour.jpg", "instructions": ["Add the Midori, vodka, lemon juice and lime juice to a Collins glass with ice.", "Stir to combine, then top with a splash of soda water.", "Garnish with a lemon wheel."], "source": "https://www.liquor.com/recipes/midori-sour/" },
+    { "name": "Shifting Sands", "ingredients": [{ "type": "beefeater  gin" }, { "type": "s maraschino liqueur" }, { "type": "grapefruit juice" }, { "type": "lemon juice" }, { "type": "club soda" }, { "type": "grapefruit wedge" }], "ingredients_print": ["1 1/2 ounces Beefeater 24 gin", "2 teaspoons maraschino liqueur", "1 1/2 ounces grapefruit juice, freshly squeezed", "1/4 ounce lemon juice, freshly squeezed", "Club soda, chilled, to top", "Garnish: grapefruit wedge"], "description": "The Shifting Sands is a tasty citrus and gin cocktail recipe from the famed late bar pro Sasha Petraske.", "description_long": "The Shifting Sands is a tasty citrus and gin cocktail recipe from the famed late bar pro Sasha Petraske.", "link": "/drink?drinkName=ShiftingSands", "image": "/drinkImages/ShiftingSands.jpg", "instructions": ["Add the gin, maraschino liqueur, grapefruit juice and lemon juice to a shaker with ice and shake until well-chilled.", "Strain into a Collins glass filled with fresh ice.", "Top with chilled club soda.", "Garnish with a grapefruit wedge."], "source": "https://www.liquor.com/recipes/the-shifting-sands/" }, 
+    { "name": "Smuggler\u2019s Cove Straits Sling", "ingredients": [{ "type": "plymouth gin" }, { "type": "heering cherry liqueur" }, { "type": "benedictine" }, { "type": "lemon juice" }, { "type": "demerara syrup (one part demerara sugar one part water)" }, { "type": "angostura bitters" }, { "type": "orange bitters" }, { "type": "club soda" }, { "type": "lemon slice" }], "ingredients_print": ["1 1/2 ounces Plymouth gin", "1/2 ounce Heering cherry liqueur", "1/4 ounce Benedictine", "3/4 ounce lemon juice, freshly squeezed", "1/2 ounce demerara syrup (one part demerara sugar, one part water)", "1 dash Angostura bitters", "1 dash orange bitters", "2 ounces club soda", "Garnish: lemon slice"], "description": "You don\u2019t need a peg leg or a parrot to enjoy the Smuggler\u2019s Cove Straits Sling, a tropical drink with gin as its base.", "description_long": "You don\u2019t need a peg leg or a parrot to enjoy the Smuggler\u2019s Cove Straits Sling, a tropical drink with gin as its base.", "link": "/drink?drinkName=Smuggler\u2019sCoveStraitsSling", "image": "/drinkImages/Smuggler\u2019sCoveStraitsSling.jpg", "instructions": ["Add the gin, cherry liqueur, Benedictine, lemon juice, demerara syrup, Angostura bitters and orange bitters into a mixing glass with ice, and stir until well-chilled.", "Strain into a Collins glass filled with fresh ice.", "Top with the club soda.", "Garnish with a lemon slice."], "source": "https://www.liquor.com/recipes/smugglers-cove-straits-sling/" }, 
+    { "name": "Jockey Club", "ingredients": [{ "type": "bourbon" }, { "type": "sweet vermouth" }, { "type": "maraschino liqueur" }, { "type": "brandied cherry" }], "ingredients_print": ["1 1/2 ounces bourbon", "1 ounce sweet vermouth", "1/4 ounce maraschino liqueur", "Garnish: brandied cherry"], "description": "The Jockey Club is a Manhattan variation that features bourbon, sweet vermouth and maraschino liqueur.", "description_long": "The Jockey Club is a Manhattan variation that features bourbon, sweet vermouth and maraschino liqueur.", "link": "/drink?drinkName=JockeyClub", "image": "/drinkImages/JockeyClub.jpg", "instructions": ["Add the bourbon, sweet vermouth and maraschino liqueur to a mixing glass with ice and stir until well-chilled.", "Strain into a chilled cocktail glass.", "Garnish with a brandied cherry on a cocktail pick."], "source": "https://www.liquor.com/recipes/jockey-club/" }, 
+    { "name": "Tuxedo No. 2", "ingredients": [{ "type": "absinthe" }, { "type": "plymouth gin" }, { "type": "blanc vermouth" }, { "type": "maraschino liqueur" }, { "type": "es orange bitters" }, { "type": "orange twist" }, { "type": "brandied cherry" }], "ingredients_print": ["1/4 ounce absinthe, to rinse", "2 1/4 ounces Plymouth gin", "1/2 ounce blanc vermouth", "1/4 ounce maraschino liqueur", "4 dashes orange bitters", "Garnish: orange twist", "Garnish: brandied cherry"], "description": "This classic gin cocktail is a relative to the Martini, but combines Plymouth-style gin and blanc vermouth with absinthe and maraschino liqueur for a softer profile.", "description_long": "This classic gin cocktail is a relative to the Martini, but combines Plymouth-style gin and blanc vermouth with absinthe and maraschino liqueur for a softer profile.", "link": "/drink?drinkName=TuxedoNo.2", "image": "/drinkImages/TuxedoNo.2.jpg", "instructions": ["Rinse a chilled cocktail glass with the absinthe and discard any excess.", "Add all other ingredients into a mixing glass with ice and stir until well-chilled.", "Strain into the prepared glass.", "Garnish with a brandied cherry and an orange twist."], "source": "https://www.liquor.com/tuxedo-number-2-cocktail-recipe-5217855" }, 
+    { "name": "Paloma", "ingredients": [{ "type": "tequila" }, { "type": "lime juice" }, { "type": "grapefruit soda" }, { "type": "lime wheel" }, { "type": "salt rim (optional)" }], "ingredients_print": ["2 ounces tequila", "1/2 ounce lime juice, freshly squeezed", "Grapefruit soda, chilled, to top", "Garnish: lime wheel", "Garnish: salt rim (optional)"], "description": "The classic Paloma is an easy-to-make cooler that combines tequila, lime juice and grapefruit soda.", "description_long": "The classic Paloma is an easy-to-make cooler that combines tequila, lime juice and grapefruit soda.", "link": "/drink?drinkName=Paloma", "image": "/drinkImages/Paloma.jpg", "instructions": ["Add the tequila, lime juice, and pinch of salt to the glass, and fill with ice.", "Top with grapefruit soda, and stir briefly and gently to combine.", "Garnish with a lime wheel."], "source": "https://www.liquor.com/recipes/paloma/" }
 ]
 
-export { INGREDIENTS, DRINKS, DRINK_INDICIES }
+export  { INGREDIENTS, DRINKS }

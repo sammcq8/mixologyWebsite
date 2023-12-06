@@ -1,46 +1,14 @@
 import Image from "next/image";
 import { DRINKS } from "@/components/constants";
+import { Ingredient, Drink } from "@/components/types";
 
-interface Drink {
-    name: string;
-    description: string;
-    description_long: string;
-    link: string;
-    ingredients: Ingredient[];
-    instructions: string[];
-    image: string;
-    image_alt: string;
-}
-interface Ingredient {
-    type: string;
-    brand: string;
-    amount: string;
-}
 
-function IngredientItem(props : {ingredient:Ingredient}){
 
-    let listItem :string = "";
-
-    if(props.ingredient.amount.endsWith("oz")){
-        listItem += props.ingredient.amount + " "
-    }
-    listItem += props.ingredient.brand + " "
-    if(props.ingredient.type != "NA"){
-        listItem += props.ingredient.type 
-    }
-    if (!props.ingredient.amount.endsWith("oz")) {
-        listItem += " " + props.ingredient.amount 
-    }
-    return(
-        <li>{listItem}</li>
-    );
-}
-
-function IngredientList(props: { ingredients: Ingredient[] }) {
+function IngredientList(props: { ingredients: String[] }) {
     let rows: React.JSX.Element[] = []
-    props.ingredients.forEach((ingredient) =>
-    rows.push(<IngredientItem ingredient={ingredient}/>)
-    )
+
+    props.ingredients.forEach(ingredient =>
+        rows.push(<li>{ingredient}</li>))
 
     return(
         <div>
@@ -69,7 +37,7 @@ function DirectionsList(props: { directions: string[] }) {
 export default function DrinkPage(props: { params: {}, searchParams: { drinkName: string} }) {
     let drink: Drink = DRINKS[0];
     DRINKS.forEach((drinkA:Drink) =>{
-        if(drinkA.name == props.searchParams.drinkName){
+        if(drinkA.name.replaceAll(" ", "") == props.searchParams.drinkName){
             drink = drinkA;
         }
     })
@@ -83,11 +51,14 @@ export default function DrinkPage(props: { params: {}, searchParams: { drinkName
                         src={drink.image} // Route of the image file
                         height={400} // Desired size with correct aspect ratio
                         width={400} // Desired size with correct aspect ratio
-                        alt={drink.image_alt}
+                        alt={drink.image_alt === undefined? "": drink.image_alt}
                     />
-                    <IngredientList ingredients={drink.ingredients}/>
+                    
+                    <IngredientList ingredients={drink.ingredients_print}/>
                     <br/>
                     <DirectionsList directions={drink.instructions}/>
+                    <br/>
+                    <a href={drink.source}>Source</a>
                 </div>
             </div>
     </main>
