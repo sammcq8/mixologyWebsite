@@ -23,58 +23,15 @@ interface Drink {
 }
 function IngredientRow(prop: {ingredient: Ingredient}) {
     return (
-        <tr>
-            <td>{prop.ingredient.type}</td>
-            <td>{prop.ingredient.brand}</td>
-        </tr>
-
-
-    );
-}
-
-
-function IngredientTableOld(prop: {ingredients: Ingredient[]}) {
-
-    let rows: React.JSX.Element[] = []; 
-    prop.ingredients.map((ingredient) => {
-        rows.push(
-            <IngredientRow ingredient={ingredient}/>
-        );
-        console.log(ingredient)
-    })
-
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows}
-            </tbody>
-        </table>
-    )
-}
-
-
-function ProductCategoryRow( prop: {category: string} ) {
-    return (
-        <tr>
-            <th colSpan={2}>
-                {prop.category}
-            </th>
-        </tr>
+            <p>{prop.ingredient.type}</p>
     );
 }
 
 function ProductRow( prop: {product:Ingredient} ) {
     return (
-        <tr>
-            <td>{prop.product.type}</td>
-            <td>{prop.product.brand}</td>
-        </tr>
+        <div>
+            <p className="font-serif text-left">{prop.product.type}</p>    
+        </div>
     );
 }
 
@@ -93,53 +50,71 @@ function IngredientTable(prop: { products: Ingredient[]} ) {
     });
 
     return (
-        <table className=' text-center text-lg'>
-            <thead>
-                <tr>
-                    <th className='font-sans'>Name</th>
-                    <th className='font-sans'>type</th>
-                </tr>
-            </thead>
-            <IngredientAdder />
-            <tbody className=''>
+        <div className=' text-center text-lg'>
+            <div className=''>
                 {rows}
-            </tbody>
-        </table>
+            </div>
+        </div>
     );
 }
 
-function IngredientAdder(){
-
-    function onClick() {
-
-    }
-    
-    return(
-        <form>
-            <input name="type"/>
-            <input name="brand"/>
-            <button onClick={(event) => onClick()} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>add</button>
-        </form>
-    )
-}
-
 function IngredientComponent(){
-    let rows: React.JSX.Element[] = [];
     const [ingredients, setIngredients] = useState<Ingredient[]>(INGREDIENTS);
+    const [name, setName] = useState<string>("");
+    const [visibleDrinks, setVisibleDrinks] = useState<Drink[]>(DRINKS);
 
 
-    DRINKS.forEach((drink) => {
-        rows.push(
-            <DrinkLink
-                drink={drink} />
-        );
-    });
+    function handleChange(event:any) {
+        setName(event.target.value);
+    }
+
+    function handleAdd(){
+        if(name != ""){
+            const newIngredient:Ingredient = {"type": name, "brand":"", "amount": ""}
+            const newList = ingredients.concat( newIngredient )
+            setIngredients(newList)
+            setName("")
+        }
+    }
+
+    function clear(){
+        setIngredients([])
+    }
+
+    function drinkToDrinkLink(drink:Drink){
+        return <DrinkLink drink = {drink}></DrinkLink>
+    }
+
+    function updateDrinks(){
+        var drinkMap:Array<Array< number | Drink>> = new Array();
+        DRINKS.forEach((drink)=>{
+            
+            let sum = drink.ingredients.filter(ingredient =>{return ingredients.map(ingredient => ingredient.type).includes(ingredient.type)}).length
+            drinkMap.push (new Array<number | Drink>(drink, sum/drink.ingredients.length))
+            console.log(drinkMap)
+        })
+        drinkMap.sort((a: Array<number | Drink>, b:Array<number | Drink>)=> (b.at(1) as number) - (a.at(1) as number))
+
+        setVisibleDrinks(drinkMap.map((drinkList: Array<number | Drink> )=> drinkList.at(0) as Drink))
+    }
+
     return(
-        <div className='grid grid-cols-4'>
+        <div className='grid lg:grid-cols-4 sm:grid-cols-1'>
+            <div>
+                <input type="text" value={name} onChange={handleChange} />
+                <button type="button" onClick={handleAdd} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
+                    Add
+                </button>
+                <button type="button" onClick={clear} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
+                    Clear
+                </button>
+                <button type="button" onClick={updateDrinks} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
+                    Search
+                </button>
+            </div>
+            <div className="col-span-1"><IngredientTable products={ingredients} /></div>
 
-            <div className=""><IngredientTable products={ingredients} /></div>
-
-            <div className="col-span-3">{rows}</div>
+            <div className="lg:col-span-3 md:col-span-1 sm:col-span-1">{visibleDrinks.map((drink)=>drinkToDrinkLink(drink))}</div>
         </div>
     )
 }
