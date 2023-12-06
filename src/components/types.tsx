@@ -1,7 +1,10 @@
 interface Ingredient {
     type: string;
 }
-
+interface IngredientCategories{
+    category:string;
+    ingredients:string[];
+}
 interface Drink {
     name: string;
     description: string;
@@ -15,4 +18,4 @@ interface Drink {
     source?: string;
 }
 
-export type {Ingredient, Drink}
+export type {Ingredient, Drink, IngredientCategories}

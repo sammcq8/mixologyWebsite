@@ -1,11 +1,54 @@
 'use client'
-//import IngredientRow from "./ingredientRow";
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { INGREDIENTS, DRINKS } from './constants';
-import { Ingredient, Drink } from './types';
+import React, { ChangeEvent, ReactElement, useState } from 'react';
+import { INGREDIENTS, DRINKS, INGREDIENTS_WITH_CATEGORIES } from './constants';
+import { Ingredient, Drink, IngredientCategories } from './types';
 
+
+function IngredientCategory(prop: {category:IngredientCategories, updateIngredients:any}){
+    let rows:React.JSX.Element[] = [];
+    let [visible, setVisible] = useState<boolean>(false);
+
+    
+    function selectOne(e: ChangeEvent<HTMLInputElement>) {
+        console.log("event" + e.target.name)
+        prop.updateIngredients(e.target.name, e.target.checked)
+    };
+
+
+
+    prop.category.ingredients.forEach((ingredient) => {
+        rows.push(
+            <li key={ingredient}>
+                <input type="checkbox" name={ingredient} id={ingredient} onChange={selectOne} />
+                <label htmlFor={ingredient}>{ingredient}</label>
+            </li>
+        );
+    
+    });
+
+    function toggle(){
+        setVisible(!visible)
+    }
+
+    return(
+        <div className='col-span-4 text-left row-span-3' id="accordion-collapse" data-accordion="collapse" >
+            <button type="button" onClick={toggle}>
+                <span className='flex'>
+                    <svg data-accordion-icon className="align-bottom w-3 h-3 rotate-180 shrink-0" fill="none" viewBox="0 0 10 10">
+                        <path className="flex align-text-bottom" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
+                    </svg>
+                    <h2 className='flex align-top font-sans text-xl'>
+                        {prop.category.category}
+                    </h2>
+                </span>
+            </button>
+            <div id="accordion-collapse-body-1" className={visible?"":"hidden"} aria-labelledby="accordion-collapse-heading-1" > <ul>{rows}</ul> </div>
+            
+        </div>
+    )
+}
 
 function IngredientRow(prop: {ingredient: Ingredient}) {
     return (
@@ -21,9 +64,13 @@ function ProductRow( prop: {product:Ingredient} ) {
     );
 }
 
-function IngredientTable(prop: { products: Ingredient[]} ) {
+function IngredientTable(prop: { products: Ingredient[], updateIngredients:any} ) {
+    let categories:React.JSX.Element[] = []
     let rows: React.JSX.Element[] = [];
-    let lastCategory :string = "";
+    let lastCategory :string = ""
+
+    INGREDIENTS_WITH_CATEGORIES.forEach(category => categories.push(<IngredientCategory category={category} updateIngredients={prop.updateIngredients}/>))
+
 
     prop.products.forEach((product) => {
   
@@ -35,8 +82,8 @@ function IngredientTable(prop: { products: Ingredient[]} ) {
 
     return (
         <div className=' text-center text-lg'>
-            <div className=''>
-                {rows}
+            <div className='grid lg:grid-cols-4 sm:grid-cols-1'>
+                {categories}
             </div>
         </div>
     );
@@ -44,25 +91,28 @@ function IngredientTable(prop: { products: Ingredient[]} ) {
 
 function IngredientComponent(){
     const [ingredients, setIngredients] = useState<Ingredient[]>(INGREDIENTS);
-    const [name, setName] = useState<string>("");
-    const [visibleDrinks, setVisibleDrinks] = useState<Drink[]>(DRINKS);
+
+    const visibleDrinks = updateDrinks()
 
 
-    function handleChange(event:any) {
-        setName(event.target.value);
-    }
+    function addIngredient(newingredient:string, add:boolean){
+        console.log("newIngredient"+newingredient)
+        let newList = []
+        if(add){
+            const newIngredient: Ingredient = { "type": newingredient }
+            newList = ingredients.concat(newIngredient)
+            console.log("newlist")
 
-    function handleAdd(){
-        if(name != ""){
-            const newIngredient:Ingredient = {"type": name}
-            const newList = ingredients.concat( newIngredient )
-            setIngredients(newList)
-            setName("")
         }
-    }
-
-    function clear(){
-        setIngredients([])
+        else{
+            const newIngredient: Ingredient = { "type": newingredient }
+            let index = ingredients.indexOf(newIngredient)
+            newList = ingredients.splice(index, 1)
+        }
+        setIngredients(newList)
+        console.log(newList)
+        console.log(ingredients)
+        //updateDrinks()
     }
 
     function drinkToDrinkLink(drink:Drink){
@@ -75,28 +125,18 @@ function IngredientComponent(){
             
             let sum = drink.ingredients.filter(ingredient =>{return ingredients.map(ingredient => ingredient.type).includes(ingredient.type)}).length
             drinkMap.push (new Array<number | Drink>(drink, sum/drink.ingredients.length))
-            console.log(drinkMap)
         })
         drinkMap.sort((a: Array<number | Drink>, b:Array<number | Drink>)=> (b.at(1) as number) - (a.at(1) as number))
 
-        setVisibleDrinks(drinkMap.map((drinkList: Array<number | Drink> )=> drinkList.at(0) as Drink))
+        return (drinkMap.map((drinkList: Array<number | Drink> )=> drinkList.at(0) as Drink))
     }
 
     return(
         <div className='grid lg:grid-cols-4 sm:grid-cols-1'>
-            <div>
-                <input type="text" value={name} onChange={handleChange} />
-                <button type="button" onClick={handleAdd} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-                    Add
-                </button>
-                <button type="button" onClick={clear} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-                    Clear
-                </button>
-                <button type="button" onClick={updateDrinks} className='inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-                    Search
-                </button>
+            <div className="col-span-1">
+                <div><IngredientTable products={ingredients} updateIngredients={addIngredient}/></div>
             </div>
-            <div className="col-span-1"><IngredientTable products={ingredients} /></div>
+           
 
             <div className="lg:col-span-3 md:col-span-1 sm:col-span-1">{visibleDrinks.map((drink)=>drinkToDrinkLink(drink))}</div>
         </div>
@@ -104,7 +144,6 @@ function IngredientComponent(){
 }
 
 function DrinkLink( props: {drink: Drink}){
-    console.log(props.drink);
 
     return(
         <div className="p-6 sm:p-12 dark:bg-gray-900 dark:text-gray-100">

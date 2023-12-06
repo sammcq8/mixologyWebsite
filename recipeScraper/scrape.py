@@ -20,7 +20,7 @@ def download_img(pic_url, image_dest):
             handle.write(block)
 
 def ingredients_list_to_searchable(ingredients):
-    patterns = [r'[0-9]', 'ounces', 'ounce', r"[*|:|/|-]", ",", "dash", "garnish", "proof", "teaspoon", "to top", "freshly squeezed", "chilled", "to rinse"]
+    patterns = [r'[0-9]', 'ounces', 'ounce', r"[*|:|/|-]", ",", "dash", "dashes", "garnish", "proof", "teaspoon", "to top", "freshly squeezed", "chilled", "to rinse"]
     finalList = []
 
 
