@@ -13,7 +13,8 @@ export default function Home() {
         <link rel="icon" href="/icon.png" />
       </Head>
       <div className="z-10 max-w-5xl w-full  flex-grid grid-rows-2 grid-cols-4">
-        <p className='text-5xl col-span-4 row-span-1 lg:pb-10 md:pb-5'> Cordial</p>
+        
+        <Image src="/light-logo.png" width={300} height={150} alt=""/>
         <div className='row-span-1 items-center font-mono text-sm'><IngredientComponent /></div>
       </div>
     </main>
