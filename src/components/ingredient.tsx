@@ -10,6 +10,10 @@ function IngredientCategory(prop: {category:IngredientCategories, updateIngredie
     let rows:React.JSX.Element[] = [];
     let [visible, setVisible] = useState<boolean>(false);
 
+
+    function toggle() {
+        setVisible(!visible)
+    }
     
     function selectOne(e: ChangeEvent<HTMLInputElement>) {
         console.log("event" + e.target.name)
@@ -22,40 +26,28 @@ function IngredientCategory(prop: {category:IngredientCategories, updateIngredie
         rows.push(
             <li key={ingredient}>
                 <input type="checkbox" name={ingredient} id={ingredient} onChange={selectOne} />
-                <label htmlFor={ingredient}>{ingredient}</label>
+                <label className='font-sans text-sm' htmlFor={ingredient}>  {ingredient.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}</label>
             </li>
         );
     
     });
 
-    function toggle(){
-        setVisible(!visible)
-    }
 
     return(
         <div className='col-span-4 text-left row-span-3' id="accordion-collapse" data-accordion="collapse" >
             <button type="button" onClick={toggle}>
                 <span className='flex'>
                     <svg data-accordion-icon className="align-bottom w-3 h-3 rotate-180 shrink-0" fill="none" viewBox="0 0 10 10">
-                        <path className="flex align-text-bottom" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
+                        <path className="flex align-text-bottom" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
                     </svg>
-                    <h2 className='flex align-top font-sans text-xl'>
-                        {prop.category.category}
-                    </h2>
+                    <h2 className='flex align-top font-sans text-xl whitespace-pre'>{"   " + prop.category.category}</h2>
                 </span>
             </button>
-            <div id="accordion-collapse-body-1" className={visible?"":"hidden"} aria-labelledby="accordion-collapse-heading-1" > <ul>{rows}</ul> </div>
+            <div id="accordion-collapse-body-1" className={ visible?"":"hidden"} > <ul>{rows}</ul> </div>
             
         </div>
     )
 }
-
-function IngredientRow(prop: {ingredient: Ingredient}) {
-    return (
-            <p>{prop.ingredient.type}</p>
-    );
-}
-
 function ProductRow( prop: {product:Ingredient} ) {
     return (
         <div>
@@ -68,6 +60,13 @@ function IngredientTable(prop: { products: Ingredient[], updateIngredients:any} 
     let categories:React.JSX.Element[] = []
     let rows: React.JSX.Element[] = [];
     let lastCategory :string = ""
+    let [visible, setVisible] = useState<boolean>(true);
+
+
+    function toggle() {
+        setVisible(!visible)
+    }
+
 
     INGREDIENTS_WITH_CATEGORIES.forEach(category => categories.push(<IngredientCategory category={category} updateIngredients={prop.updateIngredients}/>))
 
@@ -81,9 +80,20 @@ function IngredientTable(prop: { products: Ingredient[], updateIngredients:any} 
     });
 
     return (
-        <div className=' text-center text-lg'>
-            <div className='grid lg:grid-cols-4 sm:grid-cols-1'>
-                {categories}
+        <div className='text-lg'>
+            <button type="button" onClick={toggle}>
+                <span className='flex'>
+                    <svg data-accordion-icon className="align-bottom w-6 h-6 rotate-180 shrink-0 lg:hidden" fill="none" viewBox="0 0 10 10">
+                        <path className="flex align-text-bottom" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 5 5 1 1 5" />
+                    </svg>
+                    <h2 className='font-sans text-left text-3xl'>Your Ingredients</h2>
+                </span>
+            </button>
+            <br/>
+            <hr/>
+            <div className='grid lg:grid-cols-1 lg:grid-rows-20 sm:grid-cols-1 sm:grid-rows-40 space-y-3'>
+                <div className={visible ? "" : "hidden"}>{categories}</div>
+                
             </div>
         </div>
     );
@@ -133,7 +143,7 @@ function IngredientComponent(){
 
     return(
         <div className='grid lg:grid-cols-4 sm:grid-cols-1'>
-            <div className="col-span-1">
+            <div className="col-span-1 ">
                 <div><IngredientTable products={ingredients} updateIngredients={addIngredient}/></div>
             </div>
            
