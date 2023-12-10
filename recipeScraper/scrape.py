@@ -58,7 +58,7 @@ def pull_recipe(url):
 
 
 def main():
-    links = ["https://www.liquor.com/recipes/jockey-club/", "https://www.liquor.com/tuxedo-number-2-cocktail-recipe-5217855", "https://www.liquor.com/recipes/paloma/"]
+    links = ["https://www.liquor.com/recipes/manhattan-2/", "https://www.liquor.com/recipes/negroni/","https://www.liquor.com/recipes/dry-martini/", "https://www.liquor.com/recipes/sazerac/", "https://www.liquor.com/recipes/sidecar/", "https://www.liquor.com/recipes/pisco-sour/"]
     recipes = []
     for link in links:
         recipes.append(pull_recipe(link))
