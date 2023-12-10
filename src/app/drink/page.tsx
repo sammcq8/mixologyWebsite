@@ -44,8 +44,8 @@ export default function DrinkPage(props: { params: {}, searchParams: { drinkName
     })
 
     return (
-        <main className="flex min-h-screen flex-col justify-between p-12">
-            <div className='dark:hidden p-5 text-left'><Link href={"/"}><Image src={"/light-logo.png"} width={300} height={150} alt="" /></Link></div>
+        <main className="flex min-h-screen flex-col items-center justify-between p-12">
+            <div className='dark:hidden p-5'><Link href={"/"}><Image src={"/light-logo.png"} width={300} height={150} alt="" /></Link></div>
 
             <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
                 <div>
